@@ -1,0 +1,40 @@
+{
+  "accounts": [
+    {
+      "account_id": "111111111111",
+      "account_name": "development",
+      "region": "us-east-1",
+      "volumes": [
+        {
+          "VolumeId": "vol-old-dev",
+          "State": "available",
+          "Size": 100,
+          "VolumeType": "gp3",
+          "CreateTime": "2026-09-01T00:00:00Z"
+        },
+        {
+          "VolumeId": "vol-attached-dev",
+          "State": "in-use",
+          "Size": 50,
+          "VolumeType": "gp3",
+          "CreateTime": "2026-08-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "account_id": "222222222222",
+      "account_name": "staging",
+      "region": "us-east-1",
+      "volumes": [
+        {
+          "VolumeId": "vol-old-stage",
+          "State": "available",
+          "Size": 50,
+          "VolumeType": "gp3",
+          "CreateTime": "2026-09-15T00:00:00Z"
+        }
+      ]
+    }
+  ]
+}
+
