@@ -4,6 +4,8 @@
 
 The Python tool finds old EBS volumes whose state is `available`, estimates their monthly storage cost, and writes a report. In live mode it lists active AWS Organizations accounts and assumes a read-only `EbsAuditRole` in each account. It never deletes a volume. An optional deletion plan is only a review list for a later, separately approved process.
 
+See [`DESIGN.md`](DESIGN.md) for the account flow, filtering rules, and safety boundary.
+
 ## Files
 
 - `ebs_audit.py`: offline fixture mode, live Organizations/STS/EC2 collection, report generation, and deletion-plan output.
