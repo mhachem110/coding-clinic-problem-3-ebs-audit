@@ -9,9 +9,21 @@ See [`DESIGN.md`](DESIGN.md) for the account flow, filtering rules, and safety b
 ## Files
 
 - `ebs_audit.py`: offline fixture mode, live Organizations/STS/EC2 collection, report generation, and deletion-plan output.
-- `fixtures/volumes.json`: dummy AWS-shaped data for a repeatable demo.
+- `fixtures/volumes.json`: dummy AWS-shaped data for a repeatable demo. It has two accounts, each with a region and a list of volumes. Each volume has an ID, state, size in GiB, type, and creation time. The `available` entries are unattached; the `in-use` entry is attached and should be excluded.
 - `tests/test_ebs_audit.py`: verifies old unattached filtering and cost totals.
-- `.gitignore`: excludes generated reports.
+- `.github/workflows/ci.yml`: runs the test and offline demo automatically on pushes and pull requests.
+- `.gitignore`: excludes Python cache files and the generated report and review list.
+
+### How the files fit together
+
+1. The demo command reads `fixtures/volumes.json`.
+2. `ebs_audit.py` keeps volumes that are `available` and whose **creation date** is older than the age threshold.
+3. It estimates monthly cost as size in GiB multiplied by the selected rate.
+   The JSON report includes a note that this flat-rate estimate can differ from AWS pricing by volume type and region.
+4. It writes a report and, if requested, a review list. It does not delete volumes.
+5. The test checks that the attached volume is excluded and that the two matching volumes total `$12.00` at the example rate.
+
+The fixture is JSON, so it cannot contain comments without becoming invalid input. Its fields are explained here instead.
 
 ## Demo without AWS
 

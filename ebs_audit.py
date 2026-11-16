@@ -55,6 +55,7 @@ def build_report(accounts, older_than_days, rate, now=None):
         "generated_at": now.isoformat(),
         "older_than_days": older_than_days,
         "estimated_rate_usd_per_gib_month": rate,
+        "cost_estimate_note": "Uses a flat per-GiB-month rate; actual AWS pricing varies by volume type and region.",
         "volume_count": len(rows),
         "estimated_monthly_cost_usd": round(sum(r["estimated_monthly_cost_usd"] for r in rows), 2),
         "volumes": rows,
